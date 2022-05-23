@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
 
   const getNbFreeLockers = async () => {
     try {
-     const response = await fetch('http://13.38.227.172:5000/avaibility');
+     const response = await fetch('http://35.180.116.112:5000/avaibility');
      const json = await response.json();
      setNbFreeLockers(json.nb_free_locker);
    } catch (error) {
@@ -32,7 +32,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.space} />
         <Button
           title="Récupérer"
-          onPress={() => navigation.navigate('Scan')}
+          onPress={() => navigation.navigate('ScanPickup')}
         />
       </View>
     );
