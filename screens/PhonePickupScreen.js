@@ -21,8 +21,6 @@ export default function PhonePickupScreen({ route, navigation }) {
      }
    } catch (error) {
         console.error(error);
-   } finally {
-        setLoading(false);
    }
   }
 
