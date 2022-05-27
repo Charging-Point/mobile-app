@@ -13,6 +13,7 @@ import PhonePickupScreen from './screens/PhonePickupScreen';
 import ChoiceLetChargeScreen from './screens/ChoiceLetChargeScreen';
 import ScanPickupScreen from './screens/ScanPickupScreen';
 import PhoneAlreadyInChargeScreen from './screens/PhoneAlreadyInChargeScreen';
+import OutOfServiceScreen from './screens/OutOfServiceScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="ChoiceLetCharge" component={ChoiceLetChargeScreen} />
         <Stack.Screen name="ScanPickup" component={ScanPickupScreen} />
         <Stack.Screen name="PhoneAlreadyInCharge" component={PhoneAlreadyInChargeScreen} />
+        <Stack.Screen name="OutOfService" component={OutOfServiceScreen} />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
