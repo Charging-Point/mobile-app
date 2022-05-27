@@ -34,6 +34,12 @@ export default function HomeScreen({ navigation }) {
           title="Récupérer"
           onPress={() => navigation.navigate('ScanPickup')}
         />
+        <View style={styles.space} />
+        <View style={styles.space} />
+        <Button
+          title="Casier hors service"
+          onPress={() => navigation.navigate('OutOfService')}
+        />
       </View>
     );
   }
