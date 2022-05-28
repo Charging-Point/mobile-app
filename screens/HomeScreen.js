@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
       justifyContent: 'center',
     },
     space: {
-      width: 20, // or whatever size you need
+      width: 20,
       height: 20,
     },
   });

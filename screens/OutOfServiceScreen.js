@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 
 export default function OutOfServiceScreen({ navigation }) {
-    const [id_locker, setIdLocker] = useState<String>('')
-    const putOutOfService = async (id_locker) => {
+    const [id_locker, setIdLocker] = useState("");
+
+    const putOutOfService = async () => {
         try {
             const requestOptions = {
                 method: 'PUT',
@@ -27,10 +28,11 @@ export default function OutOfServiceScreen({ navigation }) {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Indiquez l'ID du casier à mettre hors service</Text>
         <View style={styles.space} />
-        <TextInput onChange={(text)=>setIdLocker(text)} placeholder='ID du casier'/>
+        <TextInput onChangeText={(text)=>setIdLocker(text)} placeholder='ID du casier'/>
+        <View style={styles.space} />
         <Button
           title="Mettre hors service"
-          onPress={putOutOfService(id_locker)}
+          onPress={putOutOfService}
         />
       </View>
     );
