@@ -19,8 +19,6 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
             }
        } catch (error) {
             console.error(error);
-       } finally {
-            setLoading(false);
        }
       }
 
@@ -40,15 +38,12 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
             }
        } catch (error) {
             console.error(error);
-       } finally {
-            setLoading(false);
        }
       }
 
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Connector Screen</Text>
         <Button
           title="Laisser charger" //same locker
           onPress={letCharge}
