@@ -34,6 +34,14 @@ export default function OutOfServiceScreen({ navigation }) {
           title="Mettre hors service"
           onPress={putOutOfService}
         />
+        <View style={styles.space} />
+        <View style={styles.space} />
+        <View style={styles.space} />
+        <View style={styles.space} />
+        <Button
+          title="Remettre un casier en service"
+          onPress={() => navigation.navigate('BackIntoService')}
+        />
       </View>
     );
   }
