@@ -1,6 +1,6 @@
 import { Button, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-
+import getValueFor from '../utils/getToken';
 
 export default function PhonePickupScreen({ route, navigation }) {
   const { id_locker, user_uid } = route.params;
