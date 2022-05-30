@@ -1,6 +1,7 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import getValueFor from '../utils/getToken';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
@@ -19,7 +20,11 @@ export default function ScanDepositScreen({ route, navigation }) {
 
   const getIdFreeLocker = async () => {
     try {
-      const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ connector: connector }));
+      const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+        };
+      const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ connector: connector }), requestOptions);
       const json = await response.json();
       if (json.free_locker == 'null') {
         navigation.navigate('NoLocker')

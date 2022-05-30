@@ -1,6 +1,6 @@
 import { Button, StyleSheet, TouchableOpacity, Text, TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-
+import getValueFor from '../utils/getToken';
 
 export default function OutOfServiceScreen({ navigation }) {
     const [id_locker, setIdLocker] = useState("");
@@ -9,7 +9,7 @@ export default function OutOfServiceScreen({ navigation }) {
         try {
             const requestOptions = {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
             };
             const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({id_locker: id_locker, new_state: 2}), requestOptions);
             const json = await response.json();
