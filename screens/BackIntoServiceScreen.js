@@ -9,7 +9,7 @@ export default function BackIntoServiceScreen({ navigation }) {
 
     const getOutOfServiceLockers = async () => {
         try {
-         const response = await fetch('http://35.180.116.112:5000/outofservice');
+         const response = await fetch('http://35.180.116.112:5000/out-of-service');
          const json = await response.json();
          setoutOfServiceLockers(json.out_of_service_lockers);
        } catch (error) {
