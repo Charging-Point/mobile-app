@@ -26,7 +26,7 @@ export default function BackIntoServiceScreen({ navigation }) {
   }
 
   useEffect(() => {
-    //getOutOfServiceLockers();
+    getOutOfServiceLockers();
   }, []);
 
   const putBackInService = async () => {

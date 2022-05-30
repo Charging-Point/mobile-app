@@ -37,7 +37,7 @@ export default function FreeUpSpaceScreen({ navigation }) {
   }
 
   useFocusEffect(() => {
-    //getMoves();
+    getMoves();
   });
 
   const changeDeviceSlot = async () => {
