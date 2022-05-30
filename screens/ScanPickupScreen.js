@@ -19,7 +19,6 @@ export default function ScanPickupScreen({ route, navigation }) {
 
   async function readNdef() {
 
-
     setIsScanning(true);
     try {
       // register for the NFC tag with NDEF in it
