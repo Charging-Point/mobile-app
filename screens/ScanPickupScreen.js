@@ -18,9 +18,8 @@ export default function ScanPickupScreen({ route, navigation }) {
 
   async function readNdef() {
 
-
     setIsScanning(true);
-    // navigation.navigate('PhonePickup', { id_locker: 'A3', user_uid: '043D53A2936A80' })
+    //navigation.navigate('PhonePickup', { id_locker: 'A2', user_uid: '043D53A2936A80' })
     try {
       // register for the NFC tag with NDEF in it
       await NfcManager.requestTechnology(NfcTech.Ndef);
