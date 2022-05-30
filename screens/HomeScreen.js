@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -17,9 +18,9 @@ export default function HomeScreen({ navigation }) {
    }
   }
 
-  useEffect(() => {
+  useFocusEffect(() => {
     getNbFreeLockers();
-  }, []);
+  });
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -52,7 +53,7 @@ export default function HomeScreen({ navigation }) {
       justifyContent: 'center',
     },
     space: {
-      width: 20, // or whatever size you need
+      width: 20,
       height: 20,
     },
   });
