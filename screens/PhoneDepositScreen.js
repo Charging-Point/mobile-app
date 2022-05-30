@@ -15,7 +15,7 @@ export default function PhoneDepositScreen({ route, navigation }) {
     try {
       const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API},
+        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API21},
       }; 
       const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: user_uid }), requestOptions);
       const json = await response.json();
@@ -35,7 +35,7 @@ export default function PhoneDepositScreen({ route, navigation }) {
     try {
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API21 },
       };
       const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: id_locker, new_state: 1, user_uid: user_uid }), requestOptions);
       const json = await response.json();
