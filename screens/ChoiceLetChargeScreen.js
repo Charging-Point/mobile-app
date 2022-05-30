@@ -32,7 +32,7 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
             const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
             const json = await response.json();
             if (json.result == 1){
-                navigation.navigate('PhoneDeposit', {id_locker: id_locker, user_uid: user_uid})
+                navigation.navigate('Connector')
             } else {
                 navigation.navigate('Error')
             }

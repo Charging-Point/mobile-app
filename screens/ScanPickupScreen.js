@@ -10,13 +10,12 @@ export default function ScanPickupScreen({ route, navigation }) {
   const [idLocker, setIdLocker] = useState([]);
 
   async function readNdef() {
-    // navigation.navigate('PhonePickup', {id_locker: 'A3', user_uid: '043D53A2936A80'})
       try {
         // register for the NFC tag with NDEF in it
         await NfcManager.requestTechnology(NfcTech.Ndef);
         // the resolved tag object will contain `ndefMessage` property
         const tag = await NfcManager.getTag();
-        console.warn('Tag found', tag.id);
+        // console.warn('Tag found', tag.id);
         //Retrieve id_locker if user has already depose his phone
         try {
             const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({user_uid: tag.id}));
