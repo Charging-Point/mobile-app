@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function BackIntoServiceScreen({ navigation }) {
     const [id_locker, setIdLocker] = useState("");
-    const [outOfServiceLockers, setoutOfServiceLockers] = useState([])
+    const [outOfServiceLockers, setoutOfServiceLockers] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     const getOutOfServiceLockers = async () => {
