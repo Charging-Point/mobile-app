@@ -6,7 +6,7 @@ export default function FreeUpSpaceScreen({ navigation }) {
     const [currentIdLocker, setCurrentIdLocker] = useState("");
     const [freeIdParking, setFreeIdParking] = useState('');
     const [userUid, setUserUid] = useState('');
-    const [actionToDo, setActionToDo] = useState(false)
+    const [actionToDo, setActionToDo] = useState(false);
     const [isLoading, setLoading] = useState(true);
 
     const getMoves = async () => {
