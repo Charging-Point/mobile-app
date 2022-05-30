@@ -1,5 +1,5 @@
-import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View, Image } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function FreeUpSpaceScreen({ navigation }) {
@@ -8,6 +8,12 @@ export default function FreeUpSpaceScreen({ navigation }) {
   const [userUid, setUserUid] = useState('');
   const [actionToDo, setActionToDo] = useState(false);
   const [isLoading, setLoading] = useState(true);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false
+    })
+  }, [navigation])
 
   const getMoves = async () => {
     try {
@@ -61,19 +67,28 @@ export default function FreeUpSpaceScreen({ navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      {actionToDo ? (
-        <View>
-          <Text>Récupérez le téléphone dans le casier {currentIdLocker} et placez le dans le parking {freeIdParking}</Text>
-          <Button
-            title="C'est fait"
-            onPress={changeDeviceSlot}
-          />
-        </View>
-      ) : <Text>Pas d'action à effectuer, revenez plus tard.</Text>
-      }
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity style={{ flex: 1, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20 }} onPress={() => navigation.goBack()}>
+        <Image source={require('../assets/images/arrowBack.png')} style={{ width: 25, height: 25 }} />
+        <Text style={{ fontSize: 20, fontWeight: '500', marginLeft: 10 }}>Back</Text>
+      </TouchableOpacity>
+      <View style={{ flex: 6, paddingHorizontal: 40, marginTop: 70 }} >
+        {actionToDo ? (
+          <View style={{ alignItems: 'center', width: '100%' }}>
+            <Text style={styles.textDescription}>Récupérez le téléphone dans le casier </Text>
+            <Text style={{ ...styles.numberText, color: '#3DAAF2' }}>{currentIdLocker}</Text>
+            <Text style={styles.textDescription}>Placez le dans le parking</Text>
+            <Text style={{ ...styles.numberText, }}>{freeIdParking}</Text>
+            <TouchableOpacity style={styles.btnDone} onPress={changeDeviceSlot}>
+              <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold', textAlign: 'center', width: '100%' }}>C'est Fait</Text>
+            </TouchableOpacity>
+          </View>
+        ) :
+          <Text style={{ color: 'grey', fontSize: 20, fontWeight: 'bold', textAlign: 'center', width: '100%' }}>Aucune action à effectuer, revenez plus tard.</Text>
+        }
+      </View>
       <View style={styles.space} />
-    </View>
+    </View >
   );
 }
 
@@ -82,5 +97,20 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
+  textDescription: {
+    textAlign: 'center', fontSize: 20, fontWeight: 'bold', width: '100%'
+  },
+  numberText: {
+    textAlign: 'center', fontSize: 60, fontWeight: 'bold', width: '100%'
+  },
+  btnDone: {
+    width: 180,
+    height: 50,
+    backgroundColor: 'rgba(1, 185, 63, 0.64)',
+    borderRadius: 5,
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginTop: 40
+  }
 });
 

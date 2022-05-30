@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={{ width: '100%', marginTop: 60 }}>
           <Text style={{ fontSize: 15, fontWeight: '600', textAlign: 'center', color: '#5C5C5C' }} >Casiers Disponibles</Text>
-          <Text style={{ fontSize: 70, fontWeight: '500', textAlign: 'center', color: '#3DAAF2' }} >{nbFreeLockers}48</Text>
+          <Text style={{ fontSize: 70, fontWeight: '500', textAlign: 'center', color: '#3DAAF2' }} >{nbFreeLockers}</Text>
         </View>
       </View>
       <View style={{ flex: 5, backgroundColor: '#ECEBEB', borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingVertical: 20, paddingHorizontal: 35 }}>
