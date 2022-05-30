@@ -43,7 +43,7 @@ export default function ScanDepositScreen({ route, navigation }) {
       // the resolved tag object will contain `ndefMessage` property
       const tag = await NfcManager.getTag();
       setIsScanning(false);
-      console.warn('Tag found', tag.id);
+      //console.warn('Tag found', tag.id);
       // Navigate to next screen : PhoneDeposit
       navigation.navigate('PhoneDeposit', { id_locker: idFreeLocker, user_uid: tag.id })
     } catch (ex) {
@@ -52,6 +52,7 @@ export default function ScanDepositScreen({ route, navigation }) {
     } finally {
       // stop the nfc scanning
       NfcManager.cancelTechnologyRequest();
+
     }
   }
 

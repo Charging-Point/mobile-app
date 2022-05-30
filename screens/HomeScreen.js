@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
@@ -22,9 +23,9 @@ export default function HomeScreen({ navigation }) {
     })
   }, [navigation])
 
-  useEffect(() => {
+  useFocusEffect(() => {
     getNbFreeLockers();
-  }, []);
+  });
 
   return (
     <View style={{ flex: 1 }}>
@@ -61,7 +62,6 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-
     </View>
   );
 }
@@ -99,3 +99,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
