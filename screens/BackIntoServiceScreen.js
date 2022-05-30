@@ -1,5 +1,5 @@
 import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 
 
 export default function BackIntoServiceScreen({ navigation }) {
