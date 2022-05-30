@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={{ display: 'flex', alignItems: 'center' }}>
-          <TouchableOpacity style={{ ...styles.btnOutOfService, backgroundColor: '#84CEFF', marginBottom: 20 }} onPress={() => navigation.navigate('OutOfService')}>
+          <TouchableOpacity style={{ ...styles.btnOutOfService, backgroundColor: '#84CEFF', marginBottom: 20 }} onPress={() => navigation.navigate('FreeUpSpace')}>
             <Image source={require('../assets/images/freeSpace.png')} style={{ width: 25, height: 25, position: 'absolute', left: 16 }} />
             <Text style={{ color: 'white', fontWeight: 'bold', width: '100%', textAlign: 'center' }}>Libérer un Casier</Text>
           </TouchableOpacity>
