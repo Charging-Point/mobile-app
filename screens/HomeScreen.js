@@ -3,7 +3,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import Config from "react-native-config";
 import * as SecureStore from 'expo-secure-store';
-import getValueFor from '../utils/getToken';
+
 
 async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
@@ -14,11 +14,10 @@ export default function HomeScreen({ navigation }) {
   const [nbFreeLockers, setNbFreeLockers] = useState([]);
 
   const getNbFreeLockers = async () => {
-    getToken();
     try {
       const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API},
       };
       const response = await fetch('http://35.180.116.112:5000/avaibility', requestOptions);
       const json = await response.json();

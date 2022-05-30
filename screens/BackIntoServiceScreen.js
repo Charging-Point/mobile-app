@@ -1,6 +1,5 @@
 import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import getValueFor from '../utils/getToken';
 
 
 export default function BackIntoServiceScreen({ navigation }) {
@@ -12,7 +11,7 @@ export default function BackIntoServiceScreen({ navigation }) {
       try {
         const requestOptions = {
           method: 'GET',
-          headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+          headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API},
         }; 
        const response = await fetch('http://35.180.116.112:5000/out-of-service', requestOptions);
        const json = await response.json();
@@ -32,7 +31,7 @@ export default function BackIntoServiceScreen({ navigation }) {
         try {
             const requestOptions = {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API },
             };
             
             const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({id_locker: id_locker, new_state: 0}), requestOptions);

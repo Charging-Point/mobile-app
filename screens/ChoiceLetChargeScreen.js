@@ -1,4 +1,4 @@
-import getValueFor from '../utils/getToken';
+
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 
@@ -9,7 +9,7 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
       try {
           const requestOptions = {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API },
               body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
           };
           const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
@@ -34,7 +34,7 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
       try {
           const requestOptions = {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API },
               body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
           };
           const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
