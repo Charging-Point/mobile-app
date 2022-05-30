@@ -16,13 +16,15 @@ import PhoneAlreadyInChargeScreen from './screens/PhoneAlreadyInChargeScreen';
 import OutOfServiceScreen from './screens/OutOfServiceScreen';
 import BackIntoServiceScreen from './screens/BackIntoServiceScreen';
 import FreeUpSpaceScreen from './screens/FreeUpSpaceScreen';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Connector" component={ConnectorScreen} />
         <Stack.Screen name="ScanDeposit" component={ScanDepositScreen} />
