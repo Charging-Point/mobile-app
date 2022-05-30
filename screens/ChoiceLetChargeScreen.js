@@ -1,9 +1,28 @@
+import getValueFor from '../utils/getToken';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import React, { useLayoutEffect } from 'react';
-import { TouchableHighlight } from 'react-native-web';
 
 export default function ChoiceLetChargeScreen({ route, navigation }) {
   const { id_locker, user_uid, deposit_time } = route.params;
+
+  const phoneRetrieved = async () => {
+      try {
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+              body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
+          };
+          const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
+          const json = await response.json();
+          if (json.result == 1){
+              navigation.navigate('Home')
+          } else {
+              navigation.navigate('Error')
+          }
+     } catch (error) {
+          console.error(error);
+     }
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -11,44 +30,24 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
     })
   }, [navigation])
 
-  const phoneRetrieved = async () => {
-    try {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
-      };
-      const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
-      const json = await response.json();
-      if (json.result == 1) {
-        navigation.navigate('Home')
-      } else {
-        navigation.navigate('Error')
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   const letCharge = async () => {
-    try {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
-      };
-      const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
-      const json = await response.json();
-      if (json.result == 1) {
-        navigation.navigate('Connector')
-      } else {
-        navigation.navigate('Error')
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      try {
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+              body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
+          };
+          const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
+          const json = await response.json();
+          if (json.result == 1){
+              navigation.navigate('Connector')
+          } else {
+              navigation.navigate('Error')
+          }
+     } catch (error) {
+          console.error(error);
+     }
   }
-
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: 200 }}>

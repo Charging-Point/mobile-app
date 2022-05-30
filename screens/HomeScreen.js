@@ -1,14 +1,26 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import Config from "react-native-config";
+import * as SecureStore from 'expo-secure-store';
+import getValueFor from '../utils/getToken';
+
+async function save(key, value) {
+  await SecureStore.setItemAsync(key, value);
+}
 
 export default function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [nbFreeLockers, setNbFreeLockers] = useState([]);
 
   const getNbFreeLockers = async () => {
+    getToken();
     try {
-      const response = await fetch('http://35.180.116.112:5000/avaibility');
+      const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+      };
+      const response = await fetch('http://35.180.116.112:5000/avaibility', requestOptions);
       const json = await response.json();
       setNbFreeLockers(json.nb_free_locker);
     } catch (error) {
@@ -17,6 +29,25 @@ export default function HomeScreen({ navigation }) {
       setLoading(false);
     }
   }
+
+  const getToken = async () => {
+    try {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: 'app', password: process.env.API_PASSWORD })
+    };
+      const response = await fetch('http://35.180.116.112:5000/token', requestOptions);
+      const json = await response.json();
+      console.log(json.access_token);
+      save('token', json.access_token);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false
@@ -26,6 +57,7 @@ export default function HomeScreen({ navigation }) {
   useFocusEffect(() => {
     getNbFreeLockers();
   });
+
 
   return (
     <View style={{ flex: 1 }}>

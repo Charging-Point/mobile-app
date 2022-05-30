@@ -1,6 +1,7 @@
 import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View, Image } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import getValueFor from '../utils/getToken';
 
 export default function FreeUpSpaceScreen({ navigation }) {
   const [currentIdLocker, setCurrentIdLocker] = useState("");
@@ -17,10 +18,18 @@ export default function FreeUpSpaceScreen({ navigation }) {
 
   const getMoves = async () => {
     try {
-      const response_parking = await fetch('http://35.180.116.112:5000/parking');
+      const requestOptionsParking = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+        };
+      const response_parking = await fetch('http://35.180.116.112:5000/parking', requestOptionsParking);
       const json_parking = await response_parking.json();
       if (json_parking.free_parking != 'null') {
-        const response_long_standing = await fetch('http://35.180.116.112:5000/long-standing-device');
+        const requestOptionsLongStanding = {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+            };
+        const response_long_standing = await fetch('http://35.180.116.112:5000/long-standing-device', requestOptionsLongStanding);
         const json_long_standing = await response_long_standing.json();
         if (json_long_standing.id_locker_long_standing != 'null') {
           setActionToDo(true);
@@ -44,7 +53,7 @@ export default function FreeUpSpaceScreen({ navigation }) {
     try {
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
       };
       const response_parking = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: freeIdParking, new_state: 1, user_uid: userUid }), requestOptions);
       const json_parking = await response_parking.json();

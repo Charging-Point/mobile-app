@@ -1,6 +1,6 @@
 import { Button, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-
+import getValueFor from '../utils/getToken';
 
 export default function PhonePickupScreen({ route, navigation }) {
   const { id_locker, user_uid } = route.params;
@@ -15,7 +15,7 @@ export default function PhonePickupScreen({ route, navigation }) {
     try {
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
       };
       const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: id_locker, new_state: 0 }), requestOptions);
       const json = await response.json();

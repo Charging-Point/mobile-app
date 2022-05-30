@@ -1,6 +1,6 @@
 import { Button, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-
+import getValueFor from '../utils/getToken';
 
 export default function PhoneDepositScreen({ route, navigation }) {
 
@@ -13,7 +13,11 @@ export default function PhoneDepositScreen({ route, navigation }) {
   }, [navigation])
   const getPhoneAlreadyInCharge = async () => {
     try {
-      const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: user_uid }));
+      const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+      }; 
+      const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: user_uid }), requestOptions);
       const json = await response.json();
       if (json.id_locker != 'null') {
         navigation.navigate('PhoneAlreadyInCharge')
@@ -31,7 +35,7 @@ export default function PhoneDepositScreen({ route, navigation }) {
     try {
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
       };
       const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: id_locker, new_state: 1, user_uid: user_uid }), requestOptions);
       const json = await response.json();

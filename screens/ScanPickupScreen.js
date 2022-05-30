@@ -1,6 +1,7 @@
 import { Button, StyleSheet, TouchableOpacity, Text, View, Image } from 'react-native';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
 import React, { useEffect, useState, useLayoutEffect } from 'react';
+import getValueFor from '../utils/getToken';
 
 // Pre-step, call this before any NFC operations
 NfcManager.start();
@@ -19,7 +20,6 @@ export default function ScanPickupScreen({ route, navigation }) {
   async function readNdef() {
 
     setIsScanning(true);
-    //navigation.navigate('PhonePickup', { id_locker: 'A2', user_uid: '043D53A2936A80' })
     try {
       // register for the NFC tag with NDEF in it
       await NfcManager.requestTechnology(NfcTech.Ndef);
@@ -28,7 +28,11 @@ export default function ScanPickupScreen({ route, navigation }) {
       //console.warn('Tag found', tag.id);
       //Retrieve id_locker if user has already depose his phone
       try {
-        const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: tag.id }));
+        const requestOptions = {
+          method: 'GET',
+          headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+          };
+        const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: tag.id }), requestOptions);
         const json = await response.json();
         if (json.id_locker == 'null') {
           navigation.navigate('NoPhone')

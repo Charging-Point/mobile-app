@@ -1,5 +1,6 @@
 import { Button, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, View, Image } from 'react-native';
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import getValueFor from '../utils/getToken';
 
 
 export default function BackIntoServiceScreen({ navigation }) {
@@ -7,46 +8,52 @@ export default function BackIntoServiceScreen({ navigation }) {
   const [outOfServiceLockers, setoutOfServiceLockers] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  const getOutOfServiceLockers = async () => {
+      try {
+        const requestOptions = {
+          method: 'GET',
+          headers: {'Authorization': 'Bearer '+ getValueFor('token')},
+        }; 
+       const response = await fetch('http://35.180.116.112:5000/out-of-service', requestOptions);
+       const json = await response.json();
+       setoutOfServiceLockers(json.out_of_service_lockers);
+     } catch (error) {
+       console.error(error);
+     } finally {
+       setLoading(false);
+     }
+    }
+        
+    useEffect(() => {
+      getOutOfServiceLockers();
+    }, []);
+
+    const putBackInService = async () => {
+        try {
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ getValueFor('token') },
+            };
+            
+            const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({id_locker: id_locker, new_state: 0}), requestOptions);
+            const json = await response.json();
+            if (json.result == 1){
+                navigation.navigate('Home')
+            }
+            else {
+                navigation.navigate('Error')
+            }
+            } catch (error) {
+                    console.error(error);
+            } 
+    }
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false
     })
   }, [navigation])
 
-  const getOutOfServiceLockers = async () => {
-    try {
-      const response = await fetch('http://35.180.116.112:5000/out-of-service');
-      const json = await response.json();
-      setoutOfServiceLockers(json.out_of_service_lockers);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getOutOfServiceLockers();
-  }, []);
-
-  const putBackInService = async () => {
-    try {
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: id_locker, new_state: 0 }), requestOptions);
-      const json = await response.json();
-      if (json.result == 1) {
-        navigation.navigate('Home')
-      }
-      else {
-        navigation.navigate('Error')
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   return (
     <View style={{ flex: 1 }}>
