@@ -9,7 +9,7 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
       try {
           const requestOptions = {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API21 },
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API2 },
               body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
           };
           const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);
@@ -34,7 +34,7 @@ export default function ChoiceLetChargeScreen({ route, navigation }) {
       try {
           const requestOptions = {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API21 },
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API2 },
               body: JSON.stringify({ id_locker: id_locker, user_uid: user_uid, deposit_time: deposit_time })
           };
           const response = await fetch('http://35.180.116.112:5000/charge', requestOptions);

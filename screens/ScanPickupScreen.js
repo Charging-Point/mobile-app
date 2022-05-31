@@ -30,7 +30,7 @@ export default function ScanPickupScreen({ route, navigation }) {
       try {
         const requestOptions = {
           method: 'GET',
-          headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API21},
+          headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API2},
           };
         const response = await fetch('http://35.180.116.112:5000/device?' + new URLSearchParams({ user_uid: tag.id }), requestOptions);
         const json = await response.json();

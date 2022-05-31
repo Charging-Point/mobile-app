@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
     try {
       const requestOptions = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API211},
+        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API2},
       };
       const response = await fetch('http://35.180.116.112:5000/avaibility', requestOptions);
       const json = await response.json();

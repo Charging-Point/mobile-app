@@ -20,14 +20,14 @@ export default function FreeUpSpaceScreen({ navigation }) {
     try {
       const requestOptionsParking = {
         method: 'GET',
-        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API21},
+        headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API2},
         };
       const response_parking = await fetch('http://35.180.116.112:5000/parking', requestOptionsParking);
       const json_parking = await response_parking.json();
       if (json_parking.free_parking != 'null') {
         const requestOptionsLongStanding = {
             method: 'GET',
-            headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API21},
+            headers: {'Authorization': 'Bearer '+ process.env.TOKEN_API2},
             };
         const response_long_standing = await fetch('http://35.180.116.112:5000/long-standing-device', requestOptionsLongStanding);
         const json_long_standing = await response_long_standing.json();
@@ -53,7 +53,7 @@ export default function FreeUpSpaceScreen({ navigation }) {
     try {
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API21 },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API2 },
       };
       const response_parking = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({ id_locker: freeIdParking, new_state: 1, user_uid: userUid }), requestOptions);
       const json_parking = await response_parking.json();

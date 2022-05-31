@@ -9,7 +9,7 @@ export default function OutOfServiceScreen({ navigation }) {
       try {
           const requestOptions = {
               method: 'PUT',
-              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API21 },
+              headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ process.env.TOKEN_API2 },
           };
           const response = await fetch('http://35.180.116.112:5000/locker?' + new URLSearchParams({id_locker: id_locker, new_state: 2}), requestOptions);
           const json = await response.json();
